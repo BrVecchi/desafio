@@ -1,6 +1,6 @@
 const data = require("./fakeData");
 
-module.exports = (req, res) => {
+const deleteUser = (req, res) => {
   try {
     const name = req.query.name;
 
@@ -16,3 +16,5 @@ module.exports = (req, res) => {
     res.status(500).send("Erro ao processar a solicitação");
   }
 };
+
+module.exports = deleteUser;

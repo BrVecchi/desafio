@@ -6,10 +6,10 @@ const authenticationMiddleware = require("./authenticationMiddleware");
 const permissionsMiddleware = require("./permissionsMiddleware");
 
 var teste1 = require("./teste1");
-var teste2 = require("./teste2");
-var teste3 = require("./teste3");
-var teste4 = require("./teste4");
-var teste5 = require("./teste5");
+const addUser = require("./teste2");
+const deleteUser = require("./teste3");
+const updateUser = require("./teste4");
+const getUserAccessCount = require("./teste5");
 
 app.set("view engine", "jade");
 
@@ -32,10 +32,15 @@ app.get("/", function (req, res) {
 
 app.get("/user", teste1.getUser);
 app.get("/users", teste1.getUsers);
-app.post("/users", teste2);
-app.delete("/users", authenticationMiddleware, permissionsMiddleware, teste3);
-app.put("/users", authenticationMiddleware, permissionsMiddleware, teste4);
-app.get("/users/access", teste5);
+app.post("/users", addUser);
+app.delete(
+  "/users",
+  authenticationMiddleware,
+  permissionsMiddleware,
+  deleteUser
+);
+app.put("/users", authenticationMiddleware, permissionsMiddleware, updateUser);
+app.get("/users/access", getUserAccessCount);
 
 const port = 3000;
 app.listen(port, function () {

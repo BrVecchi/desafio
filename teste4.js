@@ -1,6 +1,6 @@
 const data = require("./fakeData");
 
-module.exports = (req, res) => {
+const updateUser = (req, res) => {
   try {
     const id = req.query.id;
     const { name, job, canUpdate, canDelete } = req.body;
@@ -23,3 +23,5 @@ module.exports = (req, res) => {
     res.status(500).send("Erro ao processar a solicitação");
   }
 };
+
+module.exports = updateUser;

@@ -1,6 +1,6 @@
 const data = require("./fakeData");
 
-module.exports = (req, res) => {
+const addUser = (req, res) => {
   const generateUniqueId = () => {
     const ids = data.map((user) => user.id);
     const maxId = Math.max(...ids);
@@ -25,3 +25,5 @@ module.exports = (req, res) => {
     res.status(500).send("Erro ao processar a solicitação");
   }
 };
+
+module.exports = addUser;
