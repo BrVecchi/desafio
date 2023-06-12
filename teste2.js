@@ -1,10 +1,17 @@
 const data = require("./fakeData");
 
 module.exports = (req, res) => {
+  const generateUniqueId = () => {
+    const ids = data.map((user) => user.id);
+    const maxId = Math.max(...ids);
+    return maxId + 1;
+  };
+
   try {
     const { name, job } = req.body;
 
     const newUser = {
+      id: generateUniqueId(),
       name,
       job,
     };
