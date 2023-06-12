@@ -1,22 +1,18 @@
-const data = require("./fakeData");
+let data = require("./fakeData");
 
 const getUser = (req, res) => {
   try {
     const name = req.query.name;
 
-    let foundUser = null;
+    const user = data.find((user) => user.name === name);
 
-    data.forEach((user) => {
-      if (user.name === name) {
-        foundUser = user;
-      }
-    });
-
-    if (foundUser) {
-      res.send(foundUser);
-    } else {
-      res.send("Usuário não encontrado");
+    if (!user) {
+      return res.status(404).send("Usuário não encontrado");
     }
+
+    user.readCount = (user.readCount || 0) + 1;
+
+    res.send(user);
   } catch (error) {
     res.status(500).send("Erro ao processar a solicitação");
   }
