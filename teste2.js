@@ -1,17 +1,18 @@
-var data =  require("./fakeData");
+const data = require("./fakeData");
 
-module.exports = function(req, res){
-  
-    var name =  req.body.name;
-    var jov =  req.body.job;
-    
-    var newUser = {
-        name: name,
-        job: job,
-    }
+module.exports = (req, res) => {
+  try {
+    const { name, job } = req.body;
 
-    data.push(newUser)
-    
+    const newUser = {
+      name,
+      job,
+    };
+
+    data.push(newUser);
+
     res.send(newUser);
-
+  } catch (error) {
+    res.status(500).send("Erro ao processar a solicitação");
+  }
 };
