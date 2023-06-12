@@ -3,7 +3,7 @@ const data = require("./fakeData");
 module.exports = (req, res) => {
   try {
     const id = req.query.id;
-    const { name, job } = req.body;
+    const { name, job, canUpdate, canDelete } = req.body;
 
     const user = data.find((user) => user.id == id);
 
@@ -11,7 +11,12 @@ module.exports = (req, res) => {
       return res.status(404).send("Usuário não encontrado");
     }
 
-    Object.assign(user, { name, job });
+    Object.assign(user, {
+      name,
+      job,
+      canUpdate: canUpdate || false,
+      canDelete: canDelete || false,
+    });
 
     res.send(user);
   } catch (error) {

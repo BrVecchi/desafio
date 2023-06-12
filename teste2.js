@@ -8,12 +8,14 @@ module.exports = (req, res) => {
   };
 
   try {
-    const { name, job } = req.body;
+    const { name, job, canDelete, canUpdate } = req.body;
 
     const newUser = {
       id: generateUniqueId(),
       name,
       job,
+      canUpdate: canUpdate || false,
+      canDelete: canDelete || false,
     };
 
     data.push(newUser);
